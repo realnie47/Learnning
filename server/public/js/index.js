@@ -9602,6 +9602,7 @@ module.exports = function (regExp, replace) {
 
 {
   console.log('15', Number.isFinite(15));
+  console.log();
 }
 
 /***/ })
