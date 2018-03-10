@@ -89,19 +89,113 @@ __webpack_require__(2);
 // 1.常量
 // ES5
 {
-  Object.defineProperty(window, "PI2", {
-    value: 3.1415926,
-    writable: false
-  });
-  console.log(PI2);
+	Object.defineProperty(window, "PI2", {
+		value: 3.1415926,
+		writable: false
+	});
+	console.log(PI2);
 }
 // ES6
 {
-  var PI = 3.1415926;
-  console.log(PI);
+	var PI = 3.1415926;
+	console.log(PI);
 }
 
 // 2.作用域
+// es5
+{
+	var callbacks = [];
+	for (var i = 0; i <= 2; i++) {
+		callbacks[i] = function () {
+			return i * 2;
+		};
+	}
+
+	console.table([callbacks[0](), callbacks[1](), callbacks[2]()]);
+}
+
+// es6
+{
+	var callbacks2 = [];
+
+	var _loop = function _loop(_i) {
+		callbacks2[_i] = function () {
+			return _i * 2;
+		};
+	};
+
+	for (var _i = 0; _i <= 2; _i++) {
+		_loop(_i);
+	}
+
+	console.table([callbacks2[0](), callbacks2[1](), callbacks2[2]()]);
+}
+
+// 3.箭头函数
+// es5
+{
+	var events = [1, 2, 3, 4, 5];
+	var odds = events.map(function (v) {
+		return v + 1;
+	});
+
+	console.log(events, odds);
+}
+// es6
+{
+	var _events = [1, 2, 3, 4, 5];
+	var _odds = _events.map(function (v) {
+		return v + 1;
+	});
+
+	console.log(_events, _odds);
+}
+
+// es5
+{
+	var factory = function factory() {
+		this.a = 'a';
+		this.b = 'b';
+		this.c = {
+			a: 'a+',
+			b: function b() {
+				return this.a; // a+
+			}
+		};
+	};
+
+	console.log(new factory().c.b());
+}
+
+// es6 
+{
+	var _factory = function _factory() {
+		var _this = this;
+
+		this.a = 'a';
+		this.b = 'b';
+		this.c = {
+			a: 'a+',
+			b: function b() {
+				return _this.a;
+			}
+		};
+	};
+
+	console.log(new _factory().c.b());
+}
+
+// 4.默认参数
+{
+	var f = function f(x) {
+		var y = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 1;
+		var z = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : 2;
+
+		return x + y + z;
+	};
+
+	console.log(f(1));
+}
 
 /***/ })
 /******/ ]);
